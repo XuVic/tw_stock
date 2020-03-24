@@ -1,49 +1,36 @@
 package goodinfo
 
 import (
-	"strings"
-
 	"github.com/XuVic/tw_stock/extractor"
 
 	"github.com/PuerkitoBio/goquery"
-	"github.com/XuVic/tw_stock/helper"
-	"github.com/XuVic/tw_stock/scraper"
 )
 
-func NewInfoExtractor(page *scraper.Page) *InfoExtractor {
-	doc, _ := goquery.NewDocumentFromReader(strings.NewReader(page.Body))
-	temp := make(map[string]*goquery.Selection)
+func NewInfoExtractor(source interface{}) *InfoExtractor {
+	doc := createDocument(source)
 	data := make(extractor.DataSelector)
-	return &InfoExtractor{Data: data, Page: page, Doc: doc, temp: temp}
-}
-
-func NewInfoExtractorFromStr(str string) *InfoExtractor {
-	doc, _ := goquery.NewDocumentFromReader(strings.NewReader(str))
 	temp := make(map[string]*goquery.Selection)
-	data := make(extractor.DataSelector)
-	return &InfoExtractor{Data: data, Doc: doc, temp: temp}
+	base := extractor.BaseExtractor{Data: data, Doc: doc, Temp: temp}
+	return &InfoExtractor{base}
 }
 
 type InfoExtractor struct {
-	Data extractor.DataSelector
-	Doc  *goquery.Document
-	Page *scraper.Page
-	temp map[string]*goquery.Selection
+	extractor.BaseExtractor
 }
 
 func (e *InfoExtractor) Extract() map[string]interface{} {
-	e.checkDoc()
+	e.CheckDoc()
 	e.getData()
 	return e.Data
 }
 
 func (e *InfoExtractor) infoTable() *goquery.Selection {
-	if e.temp["info_table"] != nil {
-		return e.temp["info_table"]
+	if _, ok := e.Temp["info_table"]; ok {
+		return e.Temp["info_table"]
 	}
 
 	selection := e.Doc.Find("table.solid_1_padding_4_6_tbl>tbody")
-	e.temp["info_table"] = selection
+	e.Temp["info_table"] = selection
 	return selection
 }
 
@@ -61,10 +48,4 @@ func (e *InfoExtractor) getData() {
 	}
 	e.Data.SelectFrom(table, strCriteria, "toStr")
 	e.Data.SelectFrom(table, intCriteria, "toInt")
-}
-
-func (e *InfoExtractor) checkDoc() {
-	if e.Doc == nil {
-		panic(helper.NotNull("Doc attribute"))
-	}
 }

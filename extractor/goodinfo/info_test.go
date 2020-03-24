@@ -18,8 +18,10 @@ func testData(filepath string) string {
 	return string(htmlBody)
 }
 
+var data string = testData("../../testdata/Info.html")
+
 func TestInfoTable(t *testing.T) {
-	infoExtractor := NewInfoExtractorFromStr(testData("../../testdata/Info.html"))
+	infoExtractor := NewInfoExtractor(data)
 	assert.NotNil(t, infoExtractor.Doc)
 
 	table := infoExtractor.infoTable()
@@ -29,7 +31,7 @@ func TestInfoTable(t *testing.T) {
 }
 
 func TestBasicInfo(t *testing.T) {
-	infoExtractor := NewInfoExtractorFromStr(testData("../../testdata/Info.html"))
+	infoExtractor := NewInfoExtractor(data)
 	infoExtractor.getData()
 	assert.NotNil(t, infoExtractor.Data)
 	assert.NotEqual(t, 0, len(infoExtractor.Data))
@@ -37,7 +39,7 @@ func TestBasicInfo(t *testing.T) {
 
 func TestExtract(t *testing.T) {
 	mockPage := helper.MockPage(testData("../../testdata/Info.html"))
-	var e extractor.Extractor = NewInfoExtractor(mockPage)
+	var e extractor.Extractor = NewGoodInfoExtractor("info", mockPage)
 	data := e.Extract()
 	assert.NotNil(t, data)
 }

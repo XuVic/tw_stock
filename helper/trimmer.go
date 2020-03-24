@@ -7,7 +7,7 @@ import (
 )
 
 const empty = ""
-const digitsRex = "[^0-9.]"
+const digitsRex = `[^0-9.]`
 
 var units = map[string]int{
 	"億": 100000000,
