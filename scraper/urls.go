@@ -5,5 +5,6 @@ var GoodinfoURLs = map[string]string{
 	"Performance": "https://goodinfo.tw/StockInfo/StockBzPerformance.asp",
 	"Revenue":     "https://goodinfo.tw/StockInfo/ShowSaleMonChart.asp",
 	"Info":        "https://goodinfo.tw/StockInfo/BasicInfo.asp",
-	"Dividend":    "https://goodinfo.tw/StockInfo/StockDividendPolicy.asp?STOCK_ID=2881",
+	"Dividend":    "https://goodinfo.tw/StockInfo/StockDividendPolicy.asp",
+	"Transaction": "https://goodinfo.tw/StockInfo/ShowK_Chart.asp",
 }
