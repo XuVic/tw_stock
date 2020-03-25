@@ -1,25 +1,18 @@
 package extractor
 
-import (
-	"github.com/PuerkitoBio/goquery"
-	"github.com/XuVic/tw_stock/helper"
-	"github.com/XuVic/tw_stock/scraper"
-)
-
-// Extractor interface specify a method set to extract data from html page.
-type Extractor interface {
-	Extract() map[string]interface{}
+func NewExtractor() *Extractor {
+	dataCollector := NewDataCollector()
+	return &Extractor{dataCollector}
 }
 
-type BaseExtractor struct {
-	Data DataSelector
-	Doc  *goquery.Document
-	Page *scraper.Page
-	Temp map[string]*goquery.Selection
+type Extractor struct {
+	*DataCollector
 }
 
-func (e *BaseExtractor) CheckDoc() {
-	if e.Doc == nil {
-		panic(helper.NotNull("Doc attribute"))
+func (e *Extractor) Extract(criteria Criteria) {
+	if criteria.Stream {
+		e.CollectStream(criteria.Name, criteria.Selection, criteria.Rules)
+	} else {
+		e.Collect(criteria.Name, criteria.Selection, criteria.Rules)
 	}
 }
