@@ -5,6 +5,7 @@ import (
 	"os"
 	"testing"
 
+	"github.com/PuerkitoBio/goquery"
 	"github.com/XuVic/tw_stock/extractor"
 	"github.com/stretchr/testify/assert"
 )
@@ -17,13 +18,13 @@ func testData(filepath string) string {
 	return string(htmlBody)
 }
 
-// func TestSelectionFind(t *testing.T) {
-// 	// selection := Revenue(testData("../../testdata/Revenue.html")).Selection
-// 	// // t.Log(selection.Text())
-// 	// selection.Each(func(i int, s *goquery.Selection) {
-// 	// 	t.Log(s.Find("td:nth-child(1)").Text())
-// 	// })
-// }
+func TestSelectionFind(t *testing.T) {
+	selection := DividendPolicy(testData("../../testdata/Dividend.html")).Selection
+	t.Log(selection.Text())
+	selection.Each(func(i int, s *goquery.Selection) {
+		t.Log(s.Find("td:nth-child(1)").Text())
+	})
+}
 
 func TestCriteria(t *testing.T) {
 	testcases := []struct {
@@ -46,7 +47,16 @@ func TestCriteria(t *testing.T) {
 		"revenue",
 		Revenue(testData("../../testdata/Revenue.html")),
 		true,
+	}, {
+		"transaction",
+		Transaction(testData("../../testdata/Transaction.html")),
+		true,
+	}, {
+		"dividendpolicy",
+		DividendPolicy(testData("../../testdata/Dividend.html")),
+		true,
 	}}
+
 	for _, testcase := range testcases {
 		t.Run(testcase.Name, func(t *testing.T) {
 			assert.NotNil(t, testcase.Criteria.Rules)

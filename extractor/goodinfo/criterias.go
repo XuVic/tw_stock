@@ -67,3 +67,22 @@ func Revenue(source interface{}) extractor.Criteria {
 	}
 	return extractor.Criteria{Name: "Revenue", Selection: selection, Rules: rules, Stream: true}
 }
+
+func Transaction(source interface{}) extractor.Criteria {
+	selection := createDocument(source).Find("div#divK_ChartDetail div#divPriceDetail>table tbody tr")
+	rules := map[string]string{
+		"time": "td:nth-child(1)", "openPrice": "td:nth-child(2)", "closePrice": "td:nth-child(4)",
+		"highPrice": "td:nth-child(3)", "lowPrice": "td:nth-child(4)", "updownRate": "td:nth-child(7)",
+		"corBuySell": "td:nth-child(16)",
+	}
+	return extractor.Criteria{Name: "Transaction", Selection: selection, Rules: rules, Stream: true}
+}
+
+func DividendPolicy(source interface{}) extractor.Criteria {
+	selection := createDocument(source).Find("div#divDetail>table tbody tr").Slice(0, 10)
+	rules := map[string]string{
+		"time": "td:nth-child(1)", "cashDivid": "td:nth-child(4)", "stockDivid": "td:nth-child(7)",
+		"dividYield": "td:nth-child(19)", "earningShare": "td:nth-child(24)",
+	}
+	return extractor.Criteria{Name: "DividendPolicy", Selection: selection, Rules: rules, Stream: true}
+}
