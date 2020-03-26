@@ -31,7 +31,7 @@ func BasicInfo(source interface{}) extractor.Criteria {
 	return extractor.Criteria{Name: "basicinfo", Selection: selection, Rules: rules}
 }
 
-func ShareHolderInfo(source interface{}) extractor.Criteria {
+func ShareHolder(source interface{}) extractor.Criteria {
 	selection := createDocument(source).Selection
 	rules := map[string]string{
 		"dirShares":    "table.solid_1_padding_4_0_tbl:contains(全體董監) tr:nth-child(4) td:nth-child(3)",
@@ -59,7 +59,7 @@ func BzPerformance(source interface{}) extractor.Criteria {
 	return extractor.Criteria{Name: "bzperformance", Selection: selection, Rules: rules, Stream: true}
 }
 
-func Revenue(source interface{}) extractor.Criteria {
+func Revenues(source interface{}) extractor.Criteria {
 	selection := createDocument(source).Find("div#divDetail>table tbody tr")
 	rules := map[string]string{
 		"time": "td:nth-child(1)", "turnoverMon": "td:nth-child(13)", "growthRateY": "td:nth-child(15)",
@@ -68,7 +68,7 @@ func Revenue(source interface{}) extractor.Criteria {
 	return extractor.Criteria{Name: "revenues", Selection: selection, Rules: rules, Stream: true}
 }
 
-func Transaction(source interface{}) extractor.Criteria {
+func Transactions(source interface{}) extractor.Criteria {
 	selection := createDocument(source).Find("div#divK_ChartDetail div#divPriceDetail>table tbody tr")
 	rules := map[string]string{
 		"time": "td:nth-child(1)", "openPrice": "td:nth-child(2)", "closePrice": "td:nth-child(4)",
@@ -78,7 +78,7 @@ func Transaction(source interface{}) extractor.Criteria {
 	return extractor.Criteria{Name: "transactions", Selection: selection, Rules: rules, Stream: true}
 }
 
-func DividendPolicy(source interface{}) extractor.Criteria {
+func Dividends(source interface{}) extractor.Criteria {
 	selection := createDocument(source).Find("div#divDetail>table tbody tr").Slice(0, 10)
 	rules := map[string]string{
 		"time": "td:nth-child(1)", "cash": "td:nth-child(4)", "stock": "td:nth-child(7)",

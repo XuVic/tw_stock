@@ -7,18 +7,18 @@ import (
 )
 
 func TestUpdateUrls(t *testing.T) {
-	assert.Empty(t, GoodinfoClient.URLs["Overview"].RawQuery)
+	assert.Empty(t, GoodinfoClient.URLs["basicinfo"].RawQuery)
 	GoodinfoClient.updateUrls("2881")
-	assert.NotEmpty(t, GoodinfoClient.URLs["Overview"].RawQuery)
-	assert.Equal(t, "STOCK_ID=2881", GoodinfoClient.URLs["Overview"].RawQuery)
+	assert.NotEmpty(t, GoodinfoClient.URLs["basicinfo"].RawQuery)
+	assert.Equal(t, "STOCK_ID=2881", GoodinfoClient.URLs["basicinfo"].RawQuery)
 	GoodinfoClient.updateUrls("1234")
-	assert.Equal(t, "STOCK_ID=1234", GoodinfoClient.URLs["Overview"].RawQuery)
+	assert.Equal(t, "STOCK_ID=1234", GoodinfoClient.URLs["basicinfo"].RawQuery)
 }
 
 func TestGetPage(t *testing.T) {
 	GoodinfoClient.updateUrls("2881")
-	url := GoodinfoClient.URLs["Overview"]
-	page := GoodinfoClient.getPage(url, "Overview")
+	url := GoodinfoClient.URLs["basicinfo"]
+	page := GoodinfoClient.getPage(url, "basicinfo")
 	assert.NotEmpty(t, page.Body)
 	assert.Equal(t, url, page.URL)
 }
@@ -26,7 +26,7 @@ func TestGetPage(t *testing.T) {
 func TestFetchAsync(t *testing.T) {
 	pages := GoodinfoClient.fetchAsync("2881")
 	assert.NotEmpty(t, pages)
-	assert.NotEmpty(t, pages.Get("Overview"))
+	assert.NotEmpty(t, pages.Get("basicinfo"))
 }
 
 func BenchmarkFetchAsync(*testing.B) {

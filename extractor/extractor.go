@@ -11,7 +11,7 @@ type Extractor struct {
 	Criterias map[string]Criteria
 }
 
-func (e *Extractor) Extract(criteria Criteria) {
+func (e *Extractor) ExtractFrom(criteria Criteria) {
 	if _, ok := e.Criterias[criteria.Name]; !ok {
 		e.Criterias[criteria.Name] = criteria
 	}
@@ -23,8 +23,14 @@ func (e *Extractor) Extract(criteria Criteria) {
 	}
 }
 
-func (e *Extractor) ExtractorAll(criterias []Criteria) {
+func (e *Extractor) Setup(criterias []Criteria) {
 	for _, c := range criterias {
-		e.Extract(c)
+		e.Criterias[c.Name] = c
+	}
+}
+
+func (e *Extractor) ExtractAll() {
+	for _, c := range e.Criterias {
+		e.ExtractFrom(c)
 	}
 }

@@ -14,22 +14,22 @@ func TestCriteria(t *testing.T) {
 		Criteria extractor.Criteria
 	}{{
 		"stockinfo",
-		BasicInfo(helper.MockPage(helper.TestData("../../testdata/Info.html"))),
+		BasicInfo(helper.MockPage(helper.TestData("../../testdata/basicinfo.html"))),
 	}, {
 		"shareholderinfo",
-		ShareHolderInfo(helper.TestData("../../testdata/Overview.html")),
+		ShareHolder(helper.TestData("../../testdata/shareholder.html")),
 	}, {
 		"bzperformance",
-		BzPerformance(helper.TestData("../../testdata/Performance.html")),
+		BzPerformance(helper.TestData("../../testdata/bzperformance.html")),
 	}, {
 		"revenue",
-		Revenue(helper.TestData("../../testdata/Revenue.html")),
+		Revenues(helper.TestData("../../testdata/revenues.html")),
 	}, {
 		"transaction",
-		Transaction(helper.TestData("../../testdata/Transaction.html")),
+		Transactions(helper.TestData("../../testdata/transactions.html")),
 	}, {
 		"dividendpolicy",
-		DividendPolicy(helper.TestData("../../testdata/Dividend.html")),
+		Dividends(helper.TestData("../../testdata/dividends.html")),
 	}}
 
 	for _, testcase := range testcases {
@@ -37,7 +37,7 @@ func TestCriteria(t *testing.T) {
 			assert.NotNil(t, testcase.Criteria.Rules)
 			e := extractor.NewExtractor()
 			assert.Empty(t, e.Data)
-			e.Extract(testcase.Criteria)
+			e.ExtractFrom(testcase.Criteria)
 			assert.NotEmpty(t, e.Data)
 		})
 	}
