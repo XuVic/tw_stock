@@ -6,6 +6,7 @@ import (
 	"github.com/XuVic/tw_stock/extractor"
 	"github.com/XuVic/tw_stock/extractor/goodinfo"
 	. "github.com/XuVic/tw_stock/helper"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestNewStock(t *testing.T) {
@@ -21,5 +22,5 @@ func TestNewStock(t *testing.T) {
 	e.ExtractAll()
 
 	stock := NewStock(e.Data)
-	t.Log(stock.StockID)
+	assert.NotNil(t, stock.StockID)
 }
