@@ -1,18 +1,30 @@
 package extractor
 
 func NewExtractor() *Extractor {
-	dataCollector := NewDataCollector()
-	return &Extractor{dataCollector}
+	dataCollector := make(DataCollector)
+	criterias := make(map[string]Criteria)
+	return &Extractor{dataCollector, criterias}
 }
 
 type Extractor struct {
-	*DataCollector
+	Data      DataCollector
+	Criterias map[string]Criteria
 }
 
 func (e *Extractor) Extract(criteria Criteria) {
+	if _, ok := e.Criterias[criteria.Name]; !ok {
+		e.Criterias[criteria.Name] = criteria
+	}
+
 	if criteria.Stream {
-		e.CollectStream(criteria.Name, criteria.Selection, criteria.Rules)
+		e.Data.CollectStream(criteria.Name, criteria.Selection, criteria.Rules)
 	} else {
-		e.Collect(criteria.Name, criteria.Selection, criteria.Rules)
+		e.Data.Collect(criteria.Name, criteria.Selection, criteria.Rules)
+	}
+}
+
+func (e *Extractor) ExtractorAll(criterias []Criteria) {
+	for _, c := range criterias {
+		e.Extract(c)
 	}
 }
