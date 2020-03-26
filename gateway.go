@@ -1,9 +1,9 @@
-package tw_stock
+package twstock
 
 import (
-	"github.com/XuVic/tw_stock/data"
-	"github.com/XuVic/tw_stock/extractor"
-	"github.com/XuVic/tw_stock/scraper"
+	"github.com/XuVic/twstock/data"
+	"github.com/XuVic/twstock/extractor"
+	"github.com/XuVic/twstock/scraper"
 )
 
 type Gateway interface {

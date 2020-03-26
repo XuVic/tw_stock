@@ -3,8 +3,8 @@ package goodinfo
 import (
 	"testing"
 
-	"github.com/XuVic/tw_stock/extractor"
-	"github.com/XuVic/tw_stock/helper"
+	"github.com/XuVic/twstock/extractor"
+	"github.com/XuVic/twstock/helper"
 	"github.com/stretchr/testify/assert"
 )
 

@@ -5,9 +5,9 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/XuVic/tw_stock/extractor"
-	"github.com/XuVic/tw_stock/extractor/goodinfo"
-	. "github.com/XuVic/tw_stock/helper"
+	"github.com/XuVic/twstock/extractor"
+	"github.com/XuVic/twstock/extractor/goodinfo"
+	. "github.com/XuVic/twstock/helper"
 )
 
 func TestNewData(t *testing.T) {

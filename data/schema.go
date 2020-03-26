@@ -3,7 +3,7 @@ package data
 import (
 	"time"
 
-	. "github.com/XuVic/tw_stock/helper"
+	. "github.com/XuVic/twstock/helper"
 )
 
 type Dividend struct {

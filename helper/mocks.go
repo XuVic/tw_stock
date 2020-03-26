@@ -5,7 +5,7 @@ import (
 	"net/url"
 	"os"
 
-	"github.com/XuVic/tw_stock/scraper"
+	"github.com/XuVic/twstock/scraper"
 )
 
 func MockPage(body string) *scraper.Page {

@@ -4,8 +4,8 @@ import (
 	"strings"
 
 	"github.com/PuerkitoBio/goquery"
-	"github.com/XuVic/tw_stock/extractor"
-	"github.com/XuVic/tw_stock/scraper"
+	"github.com/XuVic/twstock/extractor"
+	"github.com/XuVic/twstock/scraper"
 )
 
 func createDocument(source interface{}) (doc *goquery.Document) {
