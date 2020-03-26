@@ -28,7 +28,7 @@ func BasicInfo(source interface{}) extractor.Criteria {
 		"marketCap": "tr:nth-child(9)>td:nth-child(2)", "shares": "tr:nth-child(10)>td:nth-child(2)",
 		"preShares": "tr:nth-child(11)>td:nth-child(2)",
 	}
-	return extractor.Criteria{Name: "stockInfo", Selection: selection, Rules: rules}
+	return extractor.Criteria{Name: "basicinfo", Selection: selection, Rules: rules}
 }
 
 func ShareHolderInfo(source interface{}) extractor.Criteria {
@@ -45,7 +45,7 @@ func ShareHolderInfo(source interface{}) extractor.Criteria {
 		"dividendDate": "table.solid_1_padding_4_4_tbl:contains(重 要 行 事 曆) tr:nth-child(10) td:nth-child(2)",
 		"dividTraDate": "table.solid_1_padding_4_4_tbl:contains(重 要 行 事 曆) tr:nth-child(8) td:nth-child(2)",
 	}
-	return extractor.Criteria{Name: "shareHolderInfo", Selection: selection, Rules: rules}
+	return extractor.Criteria{Name: "shareholder", Selection: selection, Rules: rules}
 }
 
 func BzPerformance(source interface{}) extractor.Criteria {
@@ -65,7 +65,7 @@ func Revenue(source interface{}) extractor.Criteria {
 		"time": "td:nth-child(1)", "turnoverMon": "td:nth-child(13)", "growthRateY": "td:nth-child(15)",
 		"growthRateM": "td:nth-child(14)", "accuTurnover": "td:nth-child(16)",
 	}
-	return extractor.Criteria{Name: "Revenue", Selection: selection, Rules: rules, Stream: true}
+	return extractor.Criteria{Name: "revenues", Selection: selection, Rules: rules, Stream: true}
 }
 
 func Transaction(source interface{}) extractor.Criteria {
@@ -75,7 +75,7 @@ func Transaction(source interface{}) extractor.Criteria {
 		"highPrice": "td:nth-child(3)", "lowPrice": "td:nth-child(4)", "updownRate": "td:nth-child(7)",
 		"corBuySell": "td:nth-child(16)",
 	}
-	return extractor.Criteria{Name: "Transaction", Selection: selection, Rules: rules, Stream: true}
+	return extractor.Criteria{Name: "transactions", Selection: selection, Rules: rules, Stream: true}
 }
 
 func DividendPolicy(source interface{}) extractor.Criteria {
@@ -84,5 +84,5 @@ func DividendPolicy(source interface{}) extractor.Criteria {
 		"time": "td:nth-child(1)", "cash": "td:nth-child(4)", "stock": "td:nth-child(7)",
 		"yield": "td:nth-child(19)", "earningShare": "td:nth-child(24)",
 	}
-	return extractor.Criteria{Name: "DividendPolicy", Selection: selection, Rules: rules, Stream: true}
+	return extractor.Criteria{Name: "dividends", Selection: selection, Rules: rules, Stream: true}
 }

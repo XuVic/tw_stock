@@ -30,13 +30,13 @@ func TestNewData(t *testing.T) {
 	bzData := NewBzPerformance(e.Data[bzperformance.Name])
 	assert.NotNil(t, bzData[0].AvgPrice)
 
-	revenueData := NewRevenue(e.Data[revenue.Name])
+	revenueData := NewRevenues(e.Data[revenue.Name])
 	assert.NotNil(t, revenueData[0].TurnoverMon)
 
-	transactionData := NewTransaction(e.Data[transaction.Name])
+	transactionData := NewTransactions(e.Data[transaction.Name])
 	assert.NotNil(t, transactionData[0].OpenPrice)
 
-	dividendData := NewDividend(e.Data[dividend.Name])
+	dividendData := NewDividends(e.Data[dividend.Name])
 	assert.NotNil(t, dividendData[1].Stock)
 	t.Log(dividendData[1])
 }
